@@ -14,7 +14,7 @@ uint8_t *sha256(int8_t const *s,
 	EVP_MD_CTX *mdctx;
 	const EVP_MD *md;
 
-	if (!digest)
+	if (!s || !digest)
 		return (NULL);
 	md = EVP_sha256();
 	if (!md)
