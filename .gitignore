@@ -50,3 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+/crypto/ec_create
+/crypto/sha256-test
+/crypto/sha256
+/crypto/ec_to_pub

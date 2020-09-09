@@ -6,6 +6,7 @@ CFLAGS = -Wall -Werror -Wextra -pedantic -ggdb3 -ftrapv -Wconversion -Wunreachab
 LIBS = -I. -lssl -lcrypto
 TASK0 = sha256
 TASK1 = ec_create
+TASK2 = ec_to_pub
 # TASK2 = 2-nary_tree_traverse
 # TASK3 = 3-nary_tree_diameter
 # TASK4 = 4-path_exists
@@ -18,6 +19,9 @@ TASK1 = ec_create
 
 # $(TASK2): $(TASK2).c $(TASK1).c $(TASK0).c  2-main.c
 # 	$(CC) $(CFLAGS) -o $@  $^
+
+$(TASK2): $(TASK2).c test/$(TASK2)-main.c $(TASK1).c provided/_print_hex_buffer.c
+	$(CC) $(CFLAGS) $(LIBS) -o $@  $^
 
 $(TASK1): $(TASK1).c test/$(TASK1)-main.c provided/_print_hex_buffer.c
 	$(CC) $(CFLAGS) $(LIBS) -o $@  $^
