@@ -54,3 +54,7 @@ dkms.conf
 /crypto/sha256-test
 /crypto/sha256
 /crypto/ec_to_pub
+/crypto/key.pem
+/crypto/key_pub.pem
+/crypto/ec_save
+/crypto/ec_from_pub

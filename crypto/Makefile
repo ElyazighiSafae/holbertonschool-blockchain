@@ -8,8 +8,7 @@ TASK0 = sha256
 TASK1 = ec_create
 TASK2 = ec_to_pub
 TASK3 = ec_from_pub
-# TASK3 = 3-nary_tree_diameter
-# TASK4 = 4-path_exists
+TASK4 = ec_save
 
 # $(TASK4): $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c  4-main.c
 # 	$(CC) $(CFLAGS) -o $@  $^
@@ -19,6 +18,9 @@ TASK3 = ec_from_pub
 
 # $(TASK2): $(TASK2).c $(TASK1).c $(TASK0).c  2-main.c
 # 	$(CC) $(CFLAGS) -o $@  $^
+
+$(TASK4): $(TASK4).c test/$(TASK4)-main.c $(TASK3).c $(TASK2).c $(TASK1).c provided/_print_hex_buffer.c
+	$(CC) $(CFLAGS) $(LIBS) -o $@  $^
 
 $(TASK3): $(TASK3).c test/$(TASK3)-main.c $(TASK2).c $(TASK1).c provided/_print_hex_buffer.c
 	$(CC) $(CFLAGS) $(LIBS) -o $@  $^
