@@ -10,7 +10,15 @@ int ec_save(EC_KEY *key, char const *folder)
 {
 	char file[512] = {0};
 	FILE *fp;
+	struct stat st = {0};
 
+	if (!key || !folder)
+		return (0);
+	if (stat(folder, &st) == -1)
+	{
+		if (mkdir(folder, 0700) == -1)
+			return (0);
+	}
 	sprintf(file, "%s/key.pem", folder);
 	fp = fopen(file, "w");
 	if (!fp)

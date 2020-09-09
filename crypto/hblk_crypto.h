@@ -8,6 +8,8 @@
 #include <openssl/ec.h>
 #include <openssl/pem.h>
 #include <stdint.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 # define EC_CURVE   NID_secp256k1
 
