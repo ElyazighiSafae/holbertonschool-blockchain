@@ -12,6 +12,9 @@ EC_KEY *ec_create(void)
 	if (!key)
 		return (NULL);
 	if (EC_KEY_generate_key(key) != 1)
+	{
+		EC_KEY_free(key);
 		return (NULL);
+	}
 	return (key);
 }
