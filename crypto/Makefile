@@ -10,6 +10,7 @@ TASK2 = ec_to_pub
 TASK3 = ec_from_pub
 TASK4 = ec_save
 TASK5 = ec_load
+TASK6 = ec_sign
 
 # $(TASK4): $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c  4-main.c
 # 	$(CC) $(CFLAGS) -o $@  $^
@@ -19,6 +20,9 @@ TASK5 = ec_load
 
 # $(TASK2): $(TASK2).c $(TASK1).c $(TASK0).c  2-main.c
 # 	$(CC) $(CFLAGS) -o $@  $^
+
+$(TASK6): $(TASK6).c test/$(TASK6)-main.c $(TASK5).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c provided/_print_hex_buffer.c
+	$(CC) $(CFLAGS) $(LIBS) -o $@  $^
 
 $(TASK5): $(TASK5).c test/$(TASK5)-main.c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c provided/_print_hex_buffer.c
 	$(CC) $(CFLAGS) $(LIBS) -o $@  $^
