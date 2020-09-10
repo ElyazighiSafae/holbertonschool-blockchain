@@ -13,7 +13,7 @@ uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,
 {
 	uint8_t digest[SHA256_DIGEST_LENGTH];
 
-	if (!key || !msg || !sig)
+	if (!key || !msg)
 		return (NULL);
 	if (!EC_KEY_check_key(key))
 		return (NULL);
