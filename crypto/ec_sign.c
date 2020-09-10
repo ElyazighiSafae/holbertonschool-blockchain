@@ -15,6 +15,8 @@ uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,
 
 	if (!key || !msg || !sig)
 		return (NULL);
+	if (!EC_KEY_check_key(key))
+		return (NULL);
 	if (!SHA256(msg, msglen, digest))
 		return (NULL);
 	if (!ECDSA_sign(0, digest, SHA256_DIGEST_LENGTH,

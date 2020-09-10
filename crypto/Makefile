@@ -12,6 +12,16 @@ TASK4 = ec_save
 TASK5 = ec_load
 TASK6 = ec_sign
 TASK7 = ec_verify
+STATIC_LIB =  libhblk_crypto.a:
+
+# all: $(STATIC_LIB)
+
+# %.o: %.c
+# 	$(CC) $(CFLAGS) -c $< -o $@ $(LIBS)
+
+# $(STATIC_LIB): $(TASK0).o $(TASK1).o $(TASK2).o $(TASK3).o $(TASK4).o $(TASK5).o $(TASK6).o $(TASK7).o
+# 	ar ru $@ $^
+# 	ranlib $@
 
 $(TASK7): $(TASK7).c test/$(TASK7)-main.c $(TASK6).c $(TASK5).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c provided/_print_hex_buffer.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
@@ -36,8 +46,6 @@ $(TASK1): $(TASK1).c test/$(TASK1)-main.c provided/_print_hex_buffer.c
 
 $(TASK0): $(TASK0).c test/$(TASK0)-main.c provided/_print_hex_buffer.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
-
-#ibhblk_crypto.a:
 
 .PHONY: clean, check
 

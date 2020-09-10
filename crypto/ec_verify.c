@@ -15,6 +15,8 @@ int ec_verify(EC_KEY const *key, uint8_t const *msg,
 
 	if (!key || !msg || !sig)
 		return (0);
+	if (!EC_KEY_check_key(key))
+		return (0);
 	if (!SHA256(msg, msglen, digest))
 		return (0);
 	if (ECDSA_verify(0, digest, SHA256_DIGEST_LENGTH,
