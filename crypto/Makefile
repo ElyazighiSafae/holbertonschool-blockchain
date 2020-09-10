@@ -12,16 +12,15 @@ TASK4 = ec_save
 TASK5 = ec_load
 TASK6 = ec_sign
 TASK7 = ec_verify
-STATIC_LIB =  libhblk_crypto.a:
+STATIC_LIB = libhblk_crypto.a
+SRC = $(wildcard *.c)
+OBJ = $(SRC:.c=.o)
 
-# all: $(STATIC_LIB)
+all: $(STATIC_LIB)
 
-# %.o: %.c
-# 	$(CC) $(CFLAGS) -c $< -o $@ $(LIBS)
-
-# $(STATIC_LIB): $(TASK0).o $(TASK1).o $(TASK2).o $(TASK3).o $(TASK4).o $(TASK5).o $(TASK6).o $(TASK7).o
-# 	ar ru $@ $^
-# 	ranlib $@
+$(STATIC_LIB): $(OBJ)
+	ar ru $@ $^
+	ranlib $@
 
 $(TASK7): $(TASK7).c test/$(TASK7)-main.c $(TASK6).c $(TASK5).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c provided/_print_hex_buffer.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
@@ -50,7 +49,7 @@ $(TASK0): $(TASK0).c test/$(TASK0)-main.c provided/_print_hex_buffer.c
 .PHONY: clean, check
 
 clean:
-	rm $(TASK0) $(TASK1) $(TASK2) $(TASK3) $(TASK4) $(TASK5) $(TASK6) $(TASK7)
+	rm $(OBJ) $(TASK0) $(TASK1) $(TASK2) $(TASK3) $(TASK4) $(TASK5) $(TASK6) $(TASK7)
 
 check:
 	betty *.c *.h
