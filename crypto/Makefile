@@ -37,13 +37,12 @@ $(TASK1): $(TASK1).c test/$(TASK1)-main.c provided/_print_hex_buffer.c
 $(TASK0): $(TASK0).c test/$(TASK0)-main.c provided/_print_hex_buffer.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
-.PHONY: clean, check, run
+#ibhblk_crypto.a:
+
+.PHONY: clean, check
 
 clean:
-	rm $(TASK0) $(TASK1) $(TASK2) $(TASK3) $(TASK4)
-
-run: $(TASK1)
-	@valgrind --leak-check=full ./$^
+	rm $(TASK0) $(TASK1) $(TASK2) $(TASK3) $(TASK4) $(TASK5) $(TASK6) $(TASK7)
 
 check:
 	betty *.c *.h
