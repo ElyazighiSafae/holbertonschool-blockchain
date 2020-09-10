@@ -13,14 +13,14 @@ EC_KEY *ec_load(char const *folder)
 
 	if (!folder)
 		return (NULL);
-	sprintf(file, "%s/%s", PRI_FILENAME, folder);
+	sprintf(file, "%s/%s", folder, PRI_FILENAME);
 	fp = fopen(file, "w");
 	if (!fp)
 		return (NULL);
 	if (!PEM_read_ECPrivateKey(fp, &key, NULL, NULL))
 		return (NULL);
 	fclose(fp);
-	sprintf(file, "%s/%s", PUB_FILENAME, folder);
+	sprintf(file, "%s/%s", folder, PUB_FILENAME);
 	fp = fopen(file, "w");
 	if (!fp)
 		return (NULL);
