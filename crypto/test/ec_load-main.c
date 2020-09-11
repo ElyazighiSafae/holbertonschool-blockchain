@@ -36,6 +36,11 @@ int main(int ac, char **av)
 
     /* Test `ec_load()` */
     key2 = ec_load(av[1]);
+	if (!key2)
+	{
+		perror("EC_LOAD has FAILED");
+		return (EXIT_FAILURE);
+	}
     ec_to_pub(key2, pub);
 
     printf("Public key: ");
