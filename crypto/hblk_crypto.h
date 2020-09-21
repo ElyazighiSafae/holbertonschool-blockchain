@@ -7,6 +7,7 @@
 #include <openssl/evp.h>
 #include <openssl/ec.h>
 #include <openssl/pem.h>
+#include <openssl/bio.h>
 #include <stdint.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -15,6 +16,7 @@
 
 /* EC_KEY public key octet string length (using 256-bit curve) */
 # define EC_PUB_LEN 65
+# define EC_PRIV_LEN 100
 /* Maximum signature octet string length (using 256-bit curve) */
 # define SIG_MAX_LEN    72
 # define PRI_FILENAME   "key.pem"
