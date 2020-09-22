@@ -8,6 +8,7 @@
 #include <llist.h>
 #include <openssl/sha.h>
 #include <time.h>
+#include <unistd.h>
 #include "../../crypto/hblk_crypto.h"
 /**
  * struct blockchain_s - Blockchain structure
@@ -104,6 +105,8 @@ uint8_t *block_hash(block_t const *block,
 int blockchain_serialize(blockchain_t const *blockchain, char const *path);
 blockchain_t *blockchain_deserialize(char const *path);
 int block_is_valid(block_t const *block, block_t const *prev_block);
+
 uint8_t _get_endianness(void);
+void _swap_endian(void *p, size_t size);
 
 #endif /* __BLOCKCHAIN_H_ */

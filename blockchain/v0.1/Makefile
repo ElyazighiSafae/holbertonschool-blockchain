@@ -4,14 +4,15 @@ CC = gcc
 # CC = clang
 CFLAGS = -Wall -Werror -Wextra -pedantic -ggdb3  -ftrapv -Wconversion -Wunreachable-code --std=gnu90
 LIBS = -I. -L../../crypto -lhblk_crypto -lllist -lssl -lcrypto -pthread
+PROVIDED = provided/_blockchain_print.c provided/_blockchain_destroy.c provided/_endianness.c
+
 TASK0 = blockchain_create
 TASK1 = block_create
 TASK2 = block_destroy
 TASK3 = blockchain_destroy
 TASK4 = block_hash
 TASK5 = blockchain_serialize
-PROVIDED = provided/_blockchain_print.c provided/_blockchain_destroy.c provided/_endianness.c
-# TASK6 = ec_sign
+TASK6 = blockchain_deserialize
 # TASK7 = ec_verify
 # STATIC_LIB = libhblk_crypto.a
 # SRC = $(wildcard *.c)
@@ -22,6 +23,9 @@ PROVIDED = provided/_blockchain_print.c provided/_blockchain_destroy.c provided/
 # $(STATIC_LIB): $(OBJ)
 # 	ar ru $@ $^
 # 	ranlib $@
+
+$(TASK6): $(TASK6).c $(TASK5).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK6)-main.c $(PROVIDED)
+	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
 $(TASK5): $(TASK5).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK5)-main.c $(PROVIDED)
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
