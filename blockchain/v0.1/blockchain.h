@@ -8,6 +8,7 @@
 #include <llist.h>
 #include <openssl/sha.h>
 #include <time.h>
+#include "../../crypto/hblk_crypto.h"
 /**
  * struct blockchain_s - Blockchain structure
  *

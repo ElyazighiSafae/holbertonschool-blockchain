@@ -8,7 +8,7 @@ TASK0 = blockchain_create
 TASK1 = block_create
 TASK2 = block_destroy
 TASK3 = blockchain_destroy
-# TASK4 = ec_save
+TASK4 = block_hash
 # TASK5 = ec_load
 # TASK6 = ec_sign
 # TASK7 = ec_verify
@@ -21,6 +21,9 @@ TASK3 = blockchain_destroy
 # $(STATIC_LIB): $(OBJ)
 # 	ar ru $@ $^
 # 	ranlib $@
+
+$(TASK4): $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK4)-main.c provided/_blockchain_print.c provided/_blockchain_destroy.c
+	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
 $(TASK3): $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK3)-main.c provided/_blockchain_print.c provided/_blockchain_destroy.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
