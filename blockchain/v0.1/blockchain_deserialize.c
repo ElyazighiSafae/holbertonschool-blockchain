@@ -1,7 +1,10 @@
 #include "blockchain.h"
 
-void convert_endianness(block_t
-						*block)
+/**
+* convert_endianness - converts endianness of a block
+* @block: a blockchain block
+*/
+void convert_endianness(block_t *block)
 {
 	_swap_endian(&block->info.index, sizeof(block->info.index));
 	_swap_endian(&block->info.difficulty, sizeof(block->info.difficulty));
@@ -9,8 +12,16 @@ void convert_endianness(block_t
 	_swap_endian(&block->info.nonce, sizeof(block->info.nonce));
 }
 
-int read_blocks(FILE *fp, uint8_t
-				swap_endian, blockchain_t *blockchain, int size)
+/**
+* read_blocks - read blocks from a file
+* @fp: file pointer
+* @swap_endian: a flag to swap endianness
+* @blockchain: blockchain
+* @size: number of blocks to read
+* Return: 0 if successful, -1 if failed
+*/
+int read_blocks(FILE *fp, uint8_t swap_endian,
+				blockchain_t *blockchain, int size)
 {
 	int i;
 	block_t *block;
@@ -39,8 +50,12 @@ int read_blocks(FILE *fp, uint8_t
 	return (0);
 }
 
-blockchain_t *blockchain_deserialize(char const
-									 *path)
+/**
+* blockchain_deserialize - load blockchain
+* @path: file to read
+* Return: loaded blockchain, NULL if failed
+*/
+blockchain_t *blockchain_deserialize(char const *path)
 {
 	FILE *fp;
 	hblk_file_t header;
