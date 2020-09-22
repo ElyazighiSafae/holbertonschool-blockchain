@@ -16,7 +16,7 @@ block_t *create_genesis_block(void)
 		return (NULL);
 
 	memcpy(genesis->data.buffer, data, strlen(data));
-	genesis->data.len = 16U;
+	genesis->data.len = 16;
 
 	memcpy(genesis->hash, hash, 32);
 

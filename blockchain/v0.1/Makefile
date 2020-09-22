@@ -9,7 +9,8 @@ TASK1 = block_create
 TASK2 = block_destroy
 TASK3 = blockchain_destroy
 TASK4 = block_hash
-# TASK5 = ec_load
+TASK5 = blockchain_serialize
+PROVIDED = provided/_blockchain_print.c provided/_blockchain_destroy.c provided/_endianness.c
 # TASK6 = ec_sign
 # TASK7 = ec_verify
 # STATIC_LIB = libhblk_crypto.a
@@ -21,6 +22,9 @@ TASK4 = block_hash
 # $(STATIC_LIB): $(OBJ)
 # 	ar ru $@ $^
 # 	ranlib $@
+
+$(TASK5): $(TASK5).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK5)-main.c $(PROVIDED)
+	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
 $(TASK4): $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK4)-main.c provided/_blockchain_print.c provided/_blockchain_destroy.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
