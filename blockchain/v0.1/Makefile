@@ -6,7 +6,7 @@ CFLAGS = -Wall -Werror -Wextra -pedantic -ggdb3  -ftrapv -Wconversion -Wunreacha
 LIBS = -I. -L../../crypto -lhblk_crypto -lllist -lssl -lcrypto -pthread
 TASK0 = blockchain_create
 TASK1 = block_create
-# TASK2 = ec_to_pub
+TASK2 = block_destroy
 # TASK3 = ec_from_pub
 # TASK4 = ec_save
 # TASK5 = ec_load
@@ -21,6 +21,9 @@ TASK1 = block_create
 # $(STATIC_LIB): $(OBJ)
 # 	ar ru $@ $^
 # 	ranlib $@
+
+$(TASK2): $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK2)-main.c provided/_blockchain_print.c provided/_blockchain_destroy.c
+	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
 $(TASK1): $(TASK1).c $(TASK0).c test/block_create-main.c provided/_blockchain_print.c provided/_blockchain_destroy.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
