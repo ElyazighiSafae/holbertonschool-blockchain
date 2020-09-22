@@ -33,6 +33,7 @@ int read_blocks(FILE *fp, uint8_t
 		if (swap_endian)
 			convert_endianness(block);
 		block->data.len = data_len;
+		*(block->data.buffer + data_len) = '\0';
 		llist_add_node(blockchain->chain, block, ADD_NODE_REAR);
 	}
 	return (0);
@@ -67,5 +68,6 @@ blockchain_t *blockchain_deserialize(char const
 		_swap_endian(&size, sizeof(size));
 	if (read_blocks(fp, swap_endian, blockchain, size) == -1)
 		return (blockchain_destroy(blockchain), fclose(fp), NULL);
+	fclose(fp);
 	return (blockchain);
 }

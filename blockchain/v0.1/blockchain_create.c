@@ -17,6 +17,7 @@ block_t *create_genesis_block(void)
 
 	memcpy(genesis->data.buffer, data, strlen(data));
 	genesis->data.len = 16;
+	*(genesis->data.buffer + 16) = '\0';
 
 	memcpy(genesis->hash, hash, 32);
 
