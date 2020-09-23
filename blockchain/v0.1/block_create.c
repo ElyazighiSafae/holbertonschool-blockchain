@@ -23,7 +23,7 @@ block_t *block_create(block_t const *prev, int8_t const *data,
 	memcpy(block->data.buffer, data, max_len);
 	block->data.len = max_len;
 
-	memcpy(block->info.prev_hash, prev->hash, 32);
+	memcpy(block->info.prev_hash, prev->hash, SHA256_DIGEST_LENGTH);
 	block->info.index = prev->info.index + 1;
 	block->info.timestamp = (uint64_t)time(NULL);
 	return (block);

@@ -13,7 +13,7 @@ TASK3 = blockchain_destroy
 TASK4 = block_hash
 TASK5 = blockchain_serialize
 TASK6 = blockchain_deserialize
-# TASK7 = ec_verify
+TASK7 = block_is_valid
 # STATIC_LIB = libhblk_crypto.a
 # SRC = $(wildcard *.c)
 # OBJ = $(SRC:.c=.o)
@@ -23,6 +23,9 @@ TASK6 = blockchain_deserialize
 # $(STATIC_LIB): $(OBJ)
 # 	ar ru $@ $^
 # 	ranlib $@
+
+$(TASK7): $(TASK7).c $(TASK6).c $(TASK5).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK7)-main.c $(PROVIDED)
+	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
 $(TASK6): $(TASK6).c $(TASK5).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK6)-main.c $(PROVIDED)
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
