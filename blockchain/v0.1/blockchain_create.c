@@ -1,5 +1,10 @@
 #include "blockchain.h"
 
+#define GENESIS_TIMESTAMP 1537578000
+#define GENESIS_DATA "Holberton School"
+#define GENESIS_DATA_LEN 16
+#define GENESIS_HASH "\xc5\x2c\x26\xc8\xb5\x46\x16\x39\x63\x5d\x8e\xdf\x2a\x97\xd4\x8d\x0c\x8e\x00\x09\xc8\x17\xf2\xb1\xd3\xd7\xff\x2f\x04\x51\x58\x03"
+
 /**
 * create_genesis_block - creates genesis block
 * Return: a genesis block or NULL if failed
@@ -7,25 +12,17 @@
 block_t *create_genesis_block(void)
 {
 	block_t *genesis;
-	char *data = "Holberton School";
-	char *hash = "\xc5\x2c\x26\xc8\xb5\x46\x16\x39\x63\x5d\x8e\xdf\x2a\x97\xd4"
-		"\x8d\x0c\x8e\x00\x09\xc8\x17\xf2\xb1\xd3\xd7\xff\x2f\x04\x51\x58\x03";
 
-	genesis = malloc(sizeof(*genesis));
+	genesis = calloc(1, sizeof(*genesis));
 	if (!genesis)
 		return (NULL);
 
-	memcpy(genesis->data.buffer, data, strlen(data) - 1);
-	genesis->data.len = 16;
-	*(genesis->data.buffer + 16) = '\0';
+	memcpy(genesis->data.buffer, GENESIS_DATA, GENESIS_DATA_LEN);
+	genesis->data.len = GENESIS_DATA_LEN;
+	*(genesis->data.buffer + GENESIS_DATA_LEN) = '\0';
 
-	memcpy(genesis->hash, hash, 32);
-
-	genesis->info.index = 0;
-	genesis->info.difficulty = 0;
-	genesis->info.timestamp = 1537578000;
-	genesis->info.nonce = 0;
-	memset(genesis->info.prev_hash, 0, 32);
+	memcpy(genesis->hash, GENESIS_HASH, SHA256_DIGEST_LENGTH);
+	genesis->info.timestamp = GENESIS_TIMESTAMP;
 	return (genesis);
 }
 
