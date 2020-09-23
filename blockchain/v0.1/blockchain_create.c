@@ -47,7 +47,7 @@ blockchain_t *blockchain_create(void)
 		free(blockchain);
 		return (NULL);
 	}
-	blockchain->chain = llist_create((unsigned int)MT_SUPPORT_FALSE);
+	blockchain->chain = llist_create(MT_SUPPORT_TRUE);
 	if (!blockchain->chain)
 	{
 		free(blockchain), free(genesis);
@@ -55,7 +55,8 @@ blockchain_t *blockchain_create(void)
 	}
 	if (llist_add_node(blockchain->chain, genesis, ADD_NODE_FRONT) == -1)
 	{
-		free(blockchain->chain), free(blockchain), free(genesis);
+		llist_destroy(blockchain->chain, 1, NULL);
+		free(blockchain), free(genesis);
 		return (NULL);
 	}
 	return (blockchain);
