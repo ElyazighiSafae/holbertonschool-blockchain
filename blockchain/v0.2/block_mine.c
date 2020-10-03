@@ -6,15 +6,10 @@
 */
 void block_mine(block_t *block)
 {
-	if (!block)
-		return;
-	srandom((uint32_t)time(NULL));
-	if (!block_hash(block, block->hash))
-			return;
-	while (hash_matches_difficulty(block->hash, block->info.difficulty) == 0)
-	{
-		block->info.nonce = (uint64_t)random();
+	block->info.nonce = 0;
+	do {
+		++block->info.nonce;
 		if (!block_hash(block, block->hash))
 			return;
-	}
+	} while (hash_matches_difficulty(block->hash, block->info.difficulty) == 0);
 }
