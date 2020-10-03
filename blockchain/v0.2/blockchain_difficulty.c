@@ -2,13 +2,13 @@
 
 /**
 * blockchain_difficulty - get new blockchain difficulty
-* @blockchain - blockchain
+* @blockchain: blockchain
 * Return: return new difficulty
 */
 uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 {
 	block_t *last, *prev;
-	uint64_t diff;
+	uint64_t diff, interval;
 	uint32_t new_difficulty;
 
 	if (!blockchain)
@@ -22,15 +22,15 @@ uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 		return (last->info.index);
 	}
 	prev = llist_get_node_at(blockchain->chain,
-							 last->info.index - DIFFICULTY_ADJUSTMENT_INTERVAL);
+							 last->info.index + 1 - DIFFICULTY_ADJUSTMENT_INTERVAL);
 	if (!prev)
 		return (0);
 	diff = last->info.timestamp - prev->info.timestamp;
 	new_difficulty = last->info.difficulty;
-	if (diff < DIFFICULTY_ADJUSTMENT_INTERVAL * BLOCK_GENERATION_INTERVAL / 2)
+	interval = DIFFICULTY_ADJUSTMENT_INTERVAL * BLOCK_GENERATION_INTERVAL;
+	if (diff * 2 < interval)
 		++new_difficulty;
-	else if (diff >
-			 DIFFICULTY_ADJUSTMENT_INTERVAL * BLOCK_GENERATION_INTERVAL * 2)
-		--new_difficulty;
+	else if (diff > interval * 2)
+		new_difficulty = new_difficulty > 0 ? new_difficulty - 1 : 0;
 	return (new_difficulty);
 }
