@@ -19,7 +19,7 @@ uint32_t blockchain_difficulty(blockchain_t const *blockchain)
 	if (last->info.index == 0 ||
 		last->info.index % DIFFICULTY_ADJUSTMENT_INTERVAL != 0)
 	{
-		return (last->info.index);
+		return (last->info.difficulty);
 	}
 	prev = llist_get_node_at(blockchain->chain,
 							 last->info.index + 1 - DIFFICULTY_ADJUSTMENT_INTERVAL);
