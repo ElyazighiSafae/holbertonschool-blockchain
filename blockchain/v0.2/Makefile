@@ -16,6 +16,7 @@ TASK6 = blockchain_deserialize
 TASK7 = block_is_valid
 TASK10 = hash_matches_difficulty
 TASK11 = block_mine
+TASK12 = blockchain_difficulty
 # STATIC_LIB = libhblk_crypto.a
 # SRC = $(wildcard *.c)
 # OBJ = $(SRC:.c=.o)
@@ -25,6 +26,9 @@ TASK11 = block_mine
 # $(STATIC_LIB): $(OBJ)
 # 	ar ru $@ $^
 # 	ranlib $@
+
+$(TASK12): $(TASK12).c test/$(TASK12)-main.c $(TASK11).c $(TASK10).c $(TASK7).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c $(PROVIDED)
+	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
 $(TASK11): $(TASK11).c test/$(TASK11)-main.c $(TASK10).c $(TASK7).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c $(PROVIDED)
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)

@@ -101,6 +101,8 @@ typedef struct hblk_file_s
 } hblk_file_t;
 
 #define UNUSED(x) (void)(x)
+#define BLOCK_GENERATION_INTERVAL 1U
+#define DIFFICULTY_ADJUSTMENT_INTERVAL 5U
 
 blockchain_t *blockchain_create(void);
 block_t *block_create(block_t const *prev,

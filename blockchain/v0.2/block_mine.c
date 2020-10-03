@@ -9,9 +9,12 @@ void block_mine(block_t *block)
 	if (!block)
 		return;
 	srandom((uint32_t)time(NULL));
-	do {
+	if (!block_hash(block, block->hash))
+			return;
+	while (hash_matches_difficulty(block->hash, block->info.difficulty) == 0)
+	{
 		block->info.nonce = (uint64_t)random();
 		if (!block_hash(block, block->hash))
 			return;
-	} while (hash_matches_difficulty(block->hash, block->info.difficulty) == 0);
+	}
 }
