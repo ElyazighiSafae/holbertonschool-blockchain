@@ -15,7 +15,7 @@ uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,
 		return (NULL);
 	if (!EC_KEY_check_key(key))
 		return (NULL);
-	sig->len = (uint8_t)ECDSA_size(key);
+	/* sig->len = (uint8_t)ECDSA_size(key); */
 	if (!sig->len)
 		return (NULL);
 	if (!ECDSA_sign(EC_CURVE, msg, (int)msglen,
