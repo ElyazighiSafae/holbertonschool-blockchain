@@ -40,7 +40,7 @@ uint8_t *transaction_hash(transaction_t const *transaction,
 	size_t tin_size, tout_size;
 	int8_t *buffer;
 
-	if (!transaction || llist_size(transaction->inputs) == -1
+	if (!transaction || !hash_buf || llist_size(transaction->inputs) == -1
 		|| llist_size(transaction->outputs) == -1)
 	{
 		return (NULL);
