@@ -1,10 +1,10 @@
 #include "transaction.h"
 
 /**
-* unspent_tx_out_create - creates a unspent transaction output
+* tx_in_create - creates a transaction input
 * @unspent: points to the unspent transaction output to be converted
 * to a transaction input
-* Return: an unspent transaction output
+* Return: a transaction input
 */
 tx_in_t *tx_in_create(unspent_tx_out_t const *unspent)
 {

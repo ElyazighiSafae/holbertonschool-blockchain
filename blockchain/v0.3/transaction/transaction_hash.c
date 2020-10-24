@@ -28,9 +28,9 @@ int tout_to_buffer(llist_node_t tr, unsigned int idx, void *buffer)
 
 /**
 * unspent_tx_out_create - creates a unspent transaction output
-* @unspent: points to the unspent transaction output to be converted
-* to a transaction input
-* Return: an unspent transaction output
+* @transaction: points to the unspent transaction output to be converted
+* @hash_buf: buffer to store hash of @transaction
+* Return: @hash_buf if success, NULL on failure
 */
 uint8_t *transaction_hash(transaction_t const *transaction,
 						  uint8_t hash_buf[SHA256_DIGEST_LENGTH])

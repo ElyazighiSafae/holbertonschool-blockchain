@@ -26,8 +26,8 @@
  */
 typedef struct blockchain_s
 {
-    llist_t     *chain;
-    llist_t     *unspent;
+	llist_t     *chain;
+	llist_t     *unspent;
 } blockchain_t;
 
 /**
@@ -42,8 +42,8 @@ typedef struct block_data_s
 	 * @buffer must stay first, so we can directly use the structure as
 	 * an array of char
 	 */
-	int8_t      buffer[BLOCKCHAIN_DATA_MAX];
-	uint32_t    len;
+	int8_t buffer[BLOCKCHAIN_DATA_MAX];
+	uint32_t len;
 } block_data_t;
 
 /**
@@ -81,10 +81,10 @@ typedef struct block_info_s
  */
 typedef struct block_s
 {
-    block_info_t    info; /* This must stay first */
-    block_data_t    data; /* This must stay second */
-    llist_t     *transactions;
-    uint8_t     hash[SHA256_DIGEST_LENGTH];
+	block_info_t    info; /* This must stay first */
+	block_data_t    data; /* This must stay second */
+	llist_t     *transactions;
+	uint8_t     hash[SHA256_DIGEST_LENGTH];
 } block_t;
 
 /**
