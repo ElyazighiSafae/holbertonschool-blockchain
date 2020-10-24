@@ -3,9 +3,15 @@
 
 #include "../blockchain.h"
 
+#define ALIGN_SIZE(sizeToAlign, PowerOfTwo)       \
+        (((sizeToAlign) + (PowerOfTwo) - 1) & ~((PowerOfTwo) - 1))
+
+
 #define COINBASE_AMOUNT 50
-#define TR_IN_HASH_LEN (sizeof(tx_in_t) - sizeof(sig_t))
-#define TR_OUT_HASH_LEN SHA256_DIGEST_LENGTH
+#define TX_OUT_HASH_LEN (sizeof(uint32_t) + EC_PUB_LEN)
+#define TX_IN_HASH_LEN SHA256_DIGEST_LENGTH
+
+
 
 /**
  * struct transaction_s - Transaction structure
