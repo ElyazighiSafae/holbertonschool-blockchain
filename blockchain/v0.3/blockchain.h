@@ -18,6 +18,9 @@
 #define GENESIS_DATA_LEN 16
 #define BLOCKCHAIN_DATA_MAX 1024
 
+#undef MT_SUPPORT_TRUE
+#define MT_SUPPORT_TRUE (1U << 0)
+
 /**
  * struct blockchain_s - Blockchain structure
  *

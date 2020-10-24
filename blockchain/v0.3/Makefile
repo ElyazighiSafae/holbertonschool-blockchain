@@ -20,6 +20,7 @@ TASK12 = blockchain_difficulty
 TASK13 = tx_out_create
 TASK14 = unspent_tx_out_create
 TASK15 = tx_in_create
+TASK16 = transaction_hash
 # STATIC_LIB = libhblk_crypto.a
 # SRC = $(wildcard *.c)
 # OBJ = $(SRC:.c=.o)
@@ -29,6 +30,9 @@ TASK15 = tx_in_create
 # $(STATIC_LIB): $(OBJ)
 # 	ar ru $@ $^
 # 	ranlib $@
+
+$(TASK16): transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK16)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c
+	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
 $(TASK15): transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK15)-main.c provided/_print_hex_buffer.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)

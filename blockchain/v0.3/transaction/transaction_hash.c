@@ -9,7 +9,7 @@
 */
 int tin_to_buffer(llist_node_t tr, unsigned int idx, void *buffer)
 {
-	memcpy(buffer + idx * TR_IN_HASH_LEN, tr, TR_IN_HASH_LEN);
+	memcpy((int8_t *)buffer + idx * TX_IN_HASH_VAL_LEN, tr, TX_IN_HASH_VAL_LEN);
 	return (0);
 }
 
@@ -22,7 +22,9 @@ int tin_to_buffer(llist_node_t tr, unsigned int idx, void *buffer)
 */
 int tout_to_buffer(llist_node_t tr, unsigned int idx, void *buffer)
 {
-	memcpy(buffer + idx * TR_OUT_HASH_LEN, tr, TR_OUT_HASH_LEN);
+	memcpy((int8_t *)buffer + idx * TX_OUT_HASH_VAL_LEN,
+		   (int8_t *)tr + TX_OUT_HASH_LEN,
+		   TX_OUT_HASH_VAL_LEN);
 	return (0);
 }
 
@@ -42,8 +44,8 @@ uint8_t *transaction_hash(transaction_t const *transaction,
 	{
 		return (NULL);
 	}
-	tin_size = llist_size(transaction->inputs) * TR_IN_HASH_LEN;
-	tout_size = llist_size(transaction->outputs) * TR_OUT_HASH_LEN;
+	tin_size = (size_t)llist_size(transaction->inputs) * TX_IN_HASH_VAL_LEN;
+	tout_size = (size_t)llist_size(transaction->outputs) * TX_OUT_HASH_VAL_LEN;
 	buffer = malloc(tin_size + tout_size);
 	if (!buffer)
 	{
