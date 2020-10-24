@@ -11,15 +11,17 @@
 uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg,
 				 size_t msglen, sig_t *sig)
 {
-	if (!key || !msg || !sig)
+	uint32_t len = 0;
+
+	if (!key || !msg || !msglen)
 		return (NULL);
-	if (!EC_KEY_check_key(key))
+
+	memset(sig->sig, 0, sizeof(sig->sig));
+	if (!ECDSA_sign(0, msg, (int)msglen, sig->sig, &len, (EC_KEY *)key))
+	{
+		sig->len = 0;
 		return (NULL);
-	sig->len = (uint8_t)ECDSA_size(key);
-	if (!sig->len)
-		return (NULL);
-	if (!ECDSA_sign(0, msg, (int)msglen,
-					sig->sig, (uint32_t *)&(sig->len), (EC_KEY *)key))
-		return (NULL);
+	}
+	sig->len = (uint8_t)len;
 	return (sig->sig);
 }
