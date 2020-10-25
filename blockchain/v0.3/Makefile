@@ -26,6 +26,10 @@ TASK17 = tx_in_sign
 TASK18 = transaction_create
 TASK19 = transaction_is_valid
 TASK20 = coinbase_create
+TASK21 = coinbase_is_valid
+
+$(TASK21): transaction/$(TASK21).c transaction/$(TASK20).c transaction/$(TASK18).c transaction/$(TASK17).c transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK21)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c
+	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
 $(TASK20): transaction/$(TASK20).c transaction/$(TASK18).c transaction/$(TASK17).c transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK20)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
