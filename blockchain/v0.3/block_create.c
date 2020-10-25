@@ -19,7 +19,7 @@ block_t *block_create(block_t const *prev, int8_t const *data,
 	block = calloc(1, sizeof(*block));
 	if (!block)
 		return (NULL);
-	block->transactions = llist_create(MT_SUPPORT_FALSE);
+	block->transactions = llist_create(MT_SUPPORT_TRUE);
 	if (!block->transactions)
 		return (free(block), NULL);
 	memcpy(block->data.buffer, data, max_len);
