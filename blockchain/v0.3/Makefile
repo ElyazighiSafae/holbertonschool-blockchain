@@ -22,19 +22,18 @@ TASK14 = unspent_tx_out_create
 TASK15 = tx_in_create
 TASK16 = transaction_hash
 TASK17 = tx_in_sign
-# STATIC_LIB = libhblk_crypto.a
-# SRC = $(wildcard *.c)
-# OBJ = $(SRC:.c=.o)
+TASK17 = tx_in_sign
+TASK18 = transaction_create
 
-# all: $(STATIC_LIB)
 
-# $(STATIC_LIB): $(OBJ)
-# 	ar ru $@ $^
-# 	ranlib $@
+
+
+
+$(TASK18): transaction/$(TASK18).c transaction/$(TASK17).c transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK18)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c
+	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
 $(TASK17): transaction/$(TASK17).c transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK17)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
-
 
 $(TASK16): transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK16)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
