@@ -70,6 +70,8 @@ int transaction_is_valid(transaction_t const *transaction,
 	uint32_t idx = 0;
 	uint32_t total_input = 0;
 
+	if (!transaction || !all_unspent)
+		return (0);
 	transaction_hash(transaction, hash_buf);
 	if (memcmp(transaction->id, hash_buf, SHA256_DIGEST_LENGTH))
 	{
