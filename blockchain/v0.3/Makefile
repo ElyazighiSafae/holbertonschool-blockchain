@@ -2,7 +2,7 @@
 
 CC = gcc
 # CC = clang
-CFLAGS = -Wall -Werror -Wextra -pedantic -ggdb3  -ftrapv -Wconversion -Wunreachable-code --std=gnu90
+CFLAGS = $(LIBS) -Wall -Werror -Wextra -pedantic -ggdb3  -ftrapv -Wconversion -Wunreachable-code --std=gnu90
 LIBS = -I. -Itransaction/ -Iprovided/ -I../../crypto -L../../crypto -lhblk_crypto -lllist -lssl -lcrypto -pthread
 PROVIDED = provided/_blockchain_print.c provided/_blockchain_destroy.c provided/_endianness.c
 
@@ -28,6 +28,19 @@ TASK19 = transaction_is_valid
 TASK20 = coinbase_create
 TASK21 = coinbase_is_valid
 TASK22 = transaction_destroy
+
+
+STATIC_LIB = libhblk_blockchain.a
+SRC = $(wildcard *.c)
+OBJ = $(SRC:.c=.o)
+TX_SRC = $(wildcard transaction/*.c)
+TX_OBJ = $(TX_SRC:.c=.o)
+
+all: $(STATIC_LIB)
+
+$(STATIC_LIB): $(OBJ) $(TX_OBJ)
+	ar ru $@ $^
+	ranlib $@
 
 $(TASK22): transaction/$(TASK22).c transaction/$(TASK21).c transaction/$(TASK20).c transaction/$(TASK18).c transaction/$(TASK17).c transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK22)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
