@@ -42,7 +42,7 @@ $(STATIC_LIB): $(OBJ) $(TX_OBJ)
 	ar ru $@ $^
 	ranlib $@
 
-$(TASK22): transaction/$(TASK22).c transaction/$(TASK21).c transaction/$(TASK20).c transaction/$(TASK18).c transaction/$(TASK17).c transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK22)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
+$(TASK22): transaction/$(TASK22).c transaction/$(TASK21).c transaction/$(TASK20).c transaction/$(TASK18).c transaction/$(TASK17).c transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK22)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c
 
 $(TASK21): transaction/$(TASK21).c transaction/$(TASK20).c transaction/$(TASK18).c transaction/$(TASK17).c transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK21)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
@@ -89,7 +89,7 @@ $(TASK6): $(TASK6).c $(TASK5).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TA
 $(TASK5): $(TASK5).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK5)-main.c $(PROVIDED)
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
-$(TASK4): $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK4)-main.c provided/_blockchain_print.c provided/_blockchain_destroy.c
+$(TASK4): $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK4)-main.c provided/_blockchain_print.c provided/_blockchain_destroy.c transaction/$(TASK22).c transaction/$(TASK21).c transaction/$(TASK20).c transaction/$(TASK18).c transaction/$(TASK17).c transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK22)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
 $(TASK3): $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK3)-main.c provided/_blockchain_print.c provided/_blockchain_destroy.c
