@@ -24,10 +24,10 @@ TASK16 = transaction_hash
 TASK17 = tx_in_sign
 TASK17 = tx_in_sign
 TASK18 = transaction_create
+TASK19 = transaction_is_valid
 
-
-
-
+$(TASK19): transaction/$(TASK19).c transaction/$(TASK18).c transaction/$(TASK17).c transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK19)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c
+	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
 $(TASK18): transaction/$(TASK18).c transaction/$(TASK17).c transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK18)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
