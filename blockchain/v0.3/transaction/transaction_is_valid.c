@@ -30,7 +30,11 @@ int cmp_tr_ins(llist_node_t node, unsigned int idx, void *args)
 		*balance += unspent->out.amount;
 		key = ec_from_pub(unspent->out.pub);
 		if (!ec_verify(key, ptr[3], SHA256_DIGEST_LENGTH, &tx_in->sig))
+		{
+			EC_KEY_free(key);
 			return (1);
+		}
+		EC_KEY_free(key);
 	}
 	return (0);
 }
