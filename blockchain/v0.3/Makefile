@@ -98,7 +98,7 @@ $(TASK3): $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK3)-main.c provi
 $(TASK2): $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK2)-main.c provided/_blockchain_print.c provided/_blockchain_destroy.c provided/_print_hex_buffer.c provided/_transaction_print.c provided/_transaction_print_brief.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
-$(TASK1): $(TASK1).c $(TASK0).c test/block_create-main.c provided/_blockchain_print.c provided/_blockchain_destroy.c provided/_print_hex_buffer.c provided/_transaction_print.c provided/_transaction_print_brief.c
+$(TASK1): $(TASK1).c $(TASK2).c  $(TASK0).c test/block_create-main.c provided/_blockchain_print.c blockchain_destroy.c provided/_print_hex_buffer.c provided/_transaction_print.c provided/_transaction_print_brief.c transaction/transaction_destroy.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
 $(TASK0): $(TASK0).c test/blockchain_create-main.c provided/_blockchain_print.c provided/_blockchain_destroy.c
