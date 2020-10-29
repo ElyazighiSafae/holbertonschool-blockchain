@@ -4,7 +4,7 @@ CC = gcc
 # CC = clang
 CFLAGS = $(LIBS) -Wall -Werror -Wextra -pedantic -ggdb3  -ftrapv -Wconversion -Wunreachable-code --std=gnu90
 LIBS = -I. -Itransaction/ -Iprovided/ -I../../crypto -L../../crypto -lhblk_crypto -lllist -lssl -lcrypto -pthread
-PROVIDED = provided/_blockchain_print.c provided/_blockchain_destroy.c provided/_endianness.c
+PROVIDED = provided/_blockchain_print.c provided/_blockchain_destroy.c provided/_endianness.c provided/_print_hex_buffer.c provided/_transaction_print.c
 
 TASK0 = blockchain_create
 TASK1 = block_create
@@ -43,7 +43,7 @@ $(STATIC_LIB): $(OBJ) $(TX_OBJ)
 	ranlib $@
 
 $(TASK22): transaction/$(TASK22).c transaction/$(TASK21).c transaction/$(TASK20).c transaction/$(TASK18).c transaction/$(TASK17).c transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK22)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c
-
+	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 $(TASK21): transaction/$(TASK21).c transaction/$(TASK20).c transaction/$(TASK18).c transaction/$(TASK17).c transaction/$(TASK16).c transaction/$(TASK15).c transaction/$(TASK14).c transaction/$(TASK13).c transaction/test/$(TASK21)-main.c provided/_print_hex_buffer.c provided/_transaction_print.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 

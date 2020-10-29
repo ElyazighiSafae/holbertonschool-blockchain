@@ -25,13 +25,17 @@ uint8_t *block_hash(block_t const *block,
 					uint8_t hash_buf[SHA256_DIGEST_LENGTH])
 {
 	size_t len;
+	int list_size;
 	int8_t *buffer;
 
 	if (!block)
 		return (NULL);
 	len = sizeof(block->info) + block->data.len;
-	len += (size_t)(SHA256_DIGEST_LENGTH * llist_size(block->transactions));
-	buffer = malloc(len);
+	list_size = llist_size(block->transactions);
+	if (list_size == -1)
+		list_size = 0;
+	len += (size_t)(SHA256_DIGEST_LENGTH * list_size);
+	buffer = calloc(1, len);
 	if (!buffer)
 		return (NULL);
 	memcpy(buffer, block, sizeof(block->info) + block->data.len);

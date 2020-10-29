@@ -36,7 +36,7 @@ $(TASK11): $(TASK11).c test/$(TASK11)-main.c $(TASK10).c $(TASK7).c $(TASK4).c $
 $(TASK10): $(TASK10).c test/$(TASK10)-main.c
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
-$(TASK7): $(TASK7).c $(TASK6).c $(TASK5).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK7)-main.c $(PROVIDED)
+$(TASK7): $(TASK10).c $(TASK7).c $(TASK6).c $(TASK5).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK7)-main.c $(PROVIDED)
 	$(CC) $(CFLAGS) -o $@  $^ $(LIBS)
 
 $(TASK6): $(TASK6).c $(TASK5).c $(TASK4).c $(TASK3).c $(TASK2).c $(TASK1).c $(TASK0).c test/$(TASK6)-main.c $(PROVIDED)
